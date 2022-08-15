@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AllArticle from "./container/AllArticle";
-import ReadArticle from "./container/ReadArticle";
-import WriteArticle from "./container/WriteArticle";
-import UpdateArticle from "./container/UpdateArticle";
+import AllArticle from "./article/AllArticle";
+import ReadArticle from "./article/ReadArticle";
+import WriteArticle from "./article/WriteArticle";
+import UpdateArticle from "./article/UpdateArticle";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default function Container() {

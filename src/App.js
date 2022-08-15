@@ -4,6 +4,7 @@ import Container from "./component/Container";
 import Side from "./component/Side";
 import styled from "styled-components";
 
+ 
 const BasicFlex = styled.div`
   display: flex;
 `;
