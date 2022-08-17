@@ -7,6 +7,7 @@ const MODE_DEL = 'DELETE';
 const MODE_UPDATE = 'UPDATE';
 const MODE_SELECT = 'SELECT';
 const MODE_SELECT_ALL = 'SELECT_ALL';
+const MODE_SAVE_LIST = 'SAVE_LIST';
 
 export const articleSave = (saveData) => (
 	{
@@ -52,6 +53,13 @@ export const selectAll = () => (
 	}
 );
 
+export const saveDataList = (saveDataList) => (
+	{
+		type : MODE_SAVE_LIST,
+		saveDataList : saveDataList
+	}
+);
+
 let initialState = {
 	// let initData = {};
 	// useEffect(() => {
@@ -60,16 +68,16 @@ let initialState = {
 	// 	});
 	//   }, []);
 	//   return initData;
-	  articleList : [
-		{
-			id: "1",
-			count : "0",
-			title : "안녕하세요",
-			content : "안녕 내용",
-			"date" : "2022.02.01"
-		}
-
-	]
+	// articleList : [
+	// 	{
+	// 		id: "1",
+	// 		count : "0",
+	// 		title : "안녕하세요",
+	// 		content : "안녕 내용",
+	// 		"date" : "2022.02.01"
+	// 	}
+	// ]
+	articleList : []
 }
 
 export default function articleReducer(state = initialState, action) {
@@ -107,6 +115,11 @@ export default function articleReducer(state = initialState, action) {
 		case MODE_SELECT_ALL : 
 			return {
 				state
+			}	
+		case MODE_SAVE_LIST : 
+			state.articleList = action.saveDataList;
+			return {
+				...state
 			}	
 		default:
 			return state

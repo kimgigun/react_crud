@@ -7,8 +7,8 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-
-
+import axios from "axios";
+import { saveDataList, selectAll } from "../../module/articleReducer";
 
 let crudCss = {
   textAlign: "center",
@@ -25,7 +25,19 @@ let layout = {
 };
 
 export default function AllArticle() {
-  const {articleList} = useSelector(state => {return state.articleReducer});
+  const dispatch = useDispatch();
+  const [articleData, setArticleData] = useState([]);
+  const {articleList} = useSelector(state => state.articleReducer);
+  useEffect(() => {
+    if(articleList.length > 0){
+      setArticleData(articleList);
+    }else{
+      axios.get("/crud/list.json").then((res) => {
+        let data = dispatch(saveDataList(res.data.dataList));
+        setArticleData(data.saveDataList);
+      });
+    }
+  }, []);
 
   return (
     <div style={layout}>
@@ -69,9 +81,6 @@ export default function AllArticle() {
           )}
         </TableBody>
       </Table>
-      {/* <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link> */}
       <div
         style={{
           margin: "10px",
