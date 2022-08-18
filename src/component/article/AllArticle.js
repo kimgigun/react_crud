@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { saveDataList, selectAll } from "../../module/articleReducer";
 
@@ -26,15 +26,11 @@ let layout = {
 
 export default function AllArticle() {
   const dispatch = useDispatch();
-  const [articleData, setArticleData] = useState([]);
-  const {articleList} = useSelector(state => state.articleReducer);
+  const { articleList } = useSelector((state) => state.articleReducer);
   useEffect(() => {
-    if(articleList.length > 0){
-      setArticleData(articleList);
-    }else{
+    if (articleList.length == 0) {
       axios.get("/crud/list.json").then((res) => {
         let data = dispatch(saveDataList(res.data.dataList));
-        setArticleData(data.saveDataList);
       });
     }
   }, []);
@@ -84,7 +80,7 @@ export default function AllArticle() {
       <div
         style={{
           margin: "10px",
-          display: "flex", 
+          display: "flex",
           alignItems: "center",
           justifyContent: "flex-end",
         }}
